@@ -1,0 +1,406 @@
+/* ==========================================
+   RESET
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#F4F6FB;
+    color:#374151;
+}
+
+/* ==========================================
+   LAYOUT
+========================================== */
+
+.dashboard-body{
+    display:flex;
+    min-height:100vh;
+}
+
+/* ==========================================
+   SIDEBAR
+========================================== */
+
+.sidebar{
+
+    width:260px;
+    background:linear-gradient(180deg,#4F0BBC,#6D28D9);
+    color:white;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+
+    padding:30px 20px;
+
+}
+
+.sidebar-top{
+    display:flex;
+    flex-direction:column;
+}
+
+/* ==========================================
+   LOGO
+========================================== */
+
+.logo{
+
+    display:flex;
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:40px;
+
+}
+
+.logo-icon{
+
+    width:50px;
+    height:50px;
+
+    border-radius:12px;
+
+    background:white;
+
+    color:#5F2EEA;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:24px;
+
+}
+
+.logo-text h2{
+
+    font-size:28px;
+
+}
+
+.logo-text span{
+
+    font-size:14px;
+
+    opacity:.9;
+
+}
+
+/* ==========================================
+   MENU
+========================================== */
+
+.sidebar nav{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.sidebar nav a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    text-decoration:none;
+
+    color:white;
+
+    padding:14px 18px;
+
+    border-radius:12px;
+
+    transition:.30s;
+
+}
+
+.sidebar nav a:hover{
+
+    background:rgba(255,255,255,.18);
+
+    padding-left:24px;
+
+}
+
+.sidebar nav a.active{
+
+    background:rgba(255,255,255,.22);
+
+}
+
+/* ==========================================
+   FOOTER SIDEBAR
+========================================== */
+
+.sidebar-bottom{
+
+    border-top:1px solid rgba(255,255,255,.25);
+
+    padding-top:25px;
+
+}
+
+.usuario{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:20px;
+
+}
+
+.usuario i{
+
+    font-size:38px;
+
+}
+
+.usuario strong{
+
+    display:block;
+
+}
+
+.usuario p{
+
+    font-size:13px;
+
+    opacity:.85;
+
+}
+
+.btn-logout{
+
+    width:100%;
+
+    border:none;
+
+    background:white;
+
+    color:#5F2EEA;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.btn-logout:hover{
+
+    background:#ECE8FF;
+
+}
+
+/* ==========================================
+   MAIN
+========================================== */
+
+.dashboard-main{
+
+    flex:1;
+
+    padding:45px;
+
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.dashboard-header{
+
+    margin-bottom:35px;
+
+}
+
+.dashboard-header h1{
+
+    color:#5F2EEA;
+
+    font-size:34px;
+
+    margin-bottom:8px;
+
+}
+
+.dashboard-header p{
+
+    color:#6B7280;
+
+}
+
+/* ==========================================
+   CARDS
+========================================== */
+
+.cards-dashboard{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
+    margin-bottom:35px;
+
+}
+
+.card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+    transition:.30s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.card i{
+
+    color:#5F2EEA;
+
+    font-size:28px;
+
+    margin-bottom:15px;
+
+}
+
+.card h3{
+
+    margin-bottom:8px;
+
+}
+
+.card h2{
+
+    color:#5F2EEA;
+
+    font-size:38px;
+
+}
+
+.card span{
+
+    color:#777;
+
+}
+
+/* ==========================================
+   BOTON
+========================================== */
+
+.acciones{
+
+    margin-bottom:35px;
+
+}
+
+.btn-principal{
+
+    background:#5F2EEA;
+
+    color:white;
+
+    border:none;
+
+    padding:16px 28px;
+
+    border-radius:14px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:.30s;
+
+}
+
+.btn-principal:hover{
+
+    background:#4F0BBC;
+
+    transform:translateY(-3px);
+
+}
+
+/* ==========================================
+   ACTIVIDAD
+========================================== */
+
+.actividad{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+}
+
+.actividad h2{
+
+    color:#5F2EEA;
+
+    margin-bottom:20px;
+
+}
+
+.actividad-box{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:15px;
+
+    height:180px;
+
+    color:#888;
+
+}
+
+.actividad-box i{
+
+    font-size:40px;
+
+    color:#5F2EEA;
+
+}

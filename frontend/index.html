@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TaskPro Manager</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body class="dashboard-body">
+
+    <!-- ========================= -->
+    <!-- SIDEBAR -->
+    <!-- ========================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-top">
+
+            <div class="logo">
+
+                <div class="logo-icon">
+                    <i class="fa-solid fa-square-check"></i>
+                </div>
+
+                <div class="logo-text">
+                    <h2>TaskPro</h2>
+                    <span>Manager</span>
+                </div>
+
+            </div>
+
+            <nav>
+
+                <a href="#" class="active">
+                    <i class="fa-solid fa-house"></i>
+                    Dashboard
+                </a>
+
+                <a href="#">
+                    <i class="fa-solid fa-users"></i>
+                    Usuarios
+                </a>
+
+                <a href="#">
+                    <i class="fa-solid fa-list-check"></i>
+                    Tareas
+                </a>
+
+                <a href="#">
+                    <i class="fa-solid fa-gear"></i>
+                    Configuración
+                </a>
+
+            </nav>
+
+        </div>
+
+        <div class="sidebar-bottom">
+
+            <div class="usuario">
+
+                <i class="fa-solid fa-circle-user"></i>
+
+                <div>
+
+                    <strong>Jessica Gómez</strong>
+
+                    <p>Administradora</p>
+
+                </div>
+
+            </div>
+
+            <button class="btn-logout">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                Cerrar sesión
+
+            </button>
+
+        </div>
+
+    </aside>
+
+    <!-- ========================= -->
+    <!-- CONTENIDO -->
+    <!-- ========================= -->
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-header">
+
+            <h1>Bienvenida, Jessica 👋</h1>
+
+            <p>
+                Administra usuarios, tareas y proyectos desde un solo lugar.
+            </p>
+
+        </header>
+
+        <!-- TARJETAS -->
+
+        <section class="cards-dashboard">
+
+            <div class="card">
+
+                <i class="fa-solid fa-users"></i>
+
+                <h3>Usuarios</h3>
+
+                <h2 id="totalUsuarios">0</h2>
+
+                <span>Registrados</span>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-list-check"></i>
+
+                <h3>Tareas</h3>
+
+                <h2 id="totalTareas">0</h2>
+
+                <span>Activas</span>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-clock"></i>
+
+                <h3>Pendientes</h3>
+
+                <h2 id="totalPendientes">0</h2>
+
+                <span>Por iniciar</span>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <h3>Finalizadas</h3>
+
+                <h2 id="totalFinalizadas">0</h2>
+
+                <span>Completadas</span>
+
+            </div>
+
+        </section>
+
+        <!-- BOTÓN -->
+
+        <section class="acciones">
+
+            <button class="btn-principal">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Crear nueva tarea
+
+            </button>
+
+        </section>
+
+        <!-- ACTIVIDAD -->
+
+        <section class="actividad">
+
+            <h2>Actividad reciente</h2>
+
+            <div class="actividad-box">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                <p>No hay actividad registrada.</p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="js/api.js"></script>
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>
