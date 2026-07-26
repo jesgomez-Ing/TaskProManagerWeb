@@ -17,9 +17,6 @@
 
 <body class="dashboard-body">
 
-    <!-- ========================= -->
-    <!-- SIDEBAR -->
-    <!-- ========================= -->
 
     <aside class="sidebar">
 
@@ -40,22 +37,22 @@
 
             <nav>
 
-                <a href="#" class="active">
+                <a href="#" id="menuDashboard" class="active">
                     <i class="fa-solid fa-house"></i>
                     Dashboard
                 </a>
 
-                <a href="#">
+                <a href="#" id="menuUsuarios">
                     <i class="fa-solid fa-users"></i>
                     Usuarios
                 </a>
 
-                <a href="#">
+                <a href="#" id="menuTareas">
                     <i class="fa-solid fa-list-check"></i>
                     Tareas
                 </a>
 
-                <a href="#">
+                <a href="#" id="menuProyectos">
                     <i class="fa-solid fa-gear"></i>
                     Configuración
                 </a>
@@ -92,11 +89,8 @@
 
     </aside>
 
-    <!-- ========================= -->
-    <!-- CONTENIDO -->
-    <!-- ========================= -->
 
-    <main class="dashboard-main">
+    <main id="dashboard" class="dashboard-main">
 
         <header class="dashboard-header">
 
@@ -107,8 +101,6 @@
             </p>
 
         </header>
-
-        <!-- TARJETAS -->
 
         <section class="cards-dashboard">
 
@@ -162,7 +154,6 @@
 
         </section>
 
-        <!-- BOTÓN -->
 
         <section class="acciones">
 
@@ -175,8 +166,6 @@
             </button>
 
         </section>
-
-        <!-- ACTIVIDAD -->
 
         <section class="actividad">
 
@@ -194,7 +183,66 @@
 
     </main>
 
+<section id="moduloUsuarios" class="modulo" style="display:none;">
+
+    <div class="modulo-header">
+
+        <div>
+
+        </div>
+
+        <h1>Gestión de Usuarios</h1>
+
+        <p>Administra los usuarios registrados en TaskPro Manager.</p>
+    </div
+    <div class="acciones-superior">
+
+        <button class="btn-principal">
+            
+            <i class="fa-solid fa-users-plus"></i>
+
+            Nuevo Usuario
+
+        </button>
+
+    </div class="buscador">
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+    
+    <input
+          type="text"
+          placeholder="Buscar por nombre o correo...">
+    
+       </div>
+
+    </div>
+
+    <table class="tabla">
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="tablaUsuarios">
+
+        </tbody>
+
+    </table>
+
+</section>
+
     <script src="js/api.js"></script>
+    <script src="js/usuarios.js"></script>
 <script src="js/dashboard.js"></script>
 
 </body>

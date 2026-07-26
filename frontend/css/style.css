@@ -404,3 +404,152 @@ body{
     color:#5F2EEA;
 
 }
+
+.modulo{
+
+    flex:1;
+    padding:40px;
+}
+
+.modulo-header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.acciones-superior{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+}
+.modulo-header h1{
+
+    color:#5B35E5;
+    font-size:34px;
+}
+
+.modulo-header p{
+
+    color:#6B7280;
+    margin-top:8px;
+}
+.buscador{
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    background:#fff;
+    padding:12px 18px;
+
+    border-radius:12px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.buscador input{
+
+    border:none;
+    outline:none;
+    width:250px;
+    font-size:15px;
+}
+
+/* ======================================
+   TABLAS
+====================================== */
+.tabla{
+
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+.tabla thead{
+
+    background:#5B35E5;
+    color:white;
+}
+
+.tabla th{
+
+    padding:18px;
+    text-align:left;
+    font-size:15px;
+}
+
+.tabla td{
+
+    padding:18px;
+    border-bottom:1px solid #EEEEEE;
+}
+
+.tabla tbody tr{
+
+    transition:.3s;
+}
+
+.tabla tbody tr:hover{
+
+    background:#F5F3FF;
+}
+
+/* ======================================
+   BOTONES
+====================================== */
+.btn-editar{
+
+    background:#5B35E5;
+    color:white;
+    border:none;
+    border-radius:10px;
+    padding:10px 15px;
+    cursor:pointer;
+    margin-right:8px;
+    transition:.3s;
+
+}
+
+.btn-editar:hover{
+
+    background:#4729BF;
+    transform:translateY(-2px);
+
+}
+.btn-eliminar{
+
+    background:#EF4444;
+    color:white;
+    border:none;
+    border-radius:10px;
+    padding:10px 15px;
+    cursor:pointer;
+    transition:.3s;
+
+}
+
+.btn-eliminar:hover{
+
+    background:#D62F2F;
+    transform:translateY(-2px);
+
+}
+
+.badge-rol{
+
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:30px;
+    background:#EFEAFE;
+    color:#5B35E5;
+    font-weight:bold;
+    font-size:14px;
+}

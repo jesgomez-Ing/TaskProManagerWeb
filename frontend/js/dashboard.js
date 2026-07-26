@@ -32,4 +32,45 @@ async function cargarDashboard() {
 
 }
 
+const menuDashboard = document.getElementById("menuDashboard");
+const menuUsuarios = document.getElementById("menuUsuarios");
+
+const dashboard = document.getElementById("dashboard");
+const moduloUsuarios = document.getElementById("moduloUsuarios");
+
+function activarMenu(menuActivo){
+
+    document.querySelectorAll("nav a").forEach(opcion=>{
+
+        opcion.classList.remove("active");
+
+    });
+
+    menuActivo.classList.add("active");
+
+}
+
+menuDashboard.addEventListener("click", function (e) {
+
+    e.preventDefault();
+
+    dashboard.style.display = "block";
+    moduloUsuarios.style.display = "none";
+
+    activarMenu(menuDashboard);
+
+});
+
+menuUsuarios.addEventListener("click", function (e) {
+
+    e.preventDefault();
+
+    dashboard.style.display = "none";
+    moduloUsuarios.style.display = "block";
+
+    activarMenu(menuUsuarios);
+
+    obtenerUsuarios();
+
+});
 cargarDashboard();
