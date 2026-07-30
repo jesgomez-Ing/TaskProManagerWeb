@@ -52,7 +52,7 @@
                     Tareas
                 </a>
 
-                <a href="#" id="menuProyectos">
+                <a href="#" id="menuConfiguracion">
                     <i class="fa-solid fa-gear"></i>
                     Configuración
                 </a>
@@ -185,37 +185,40 @@
 
 <section id="moduloUsuarios" class="modulo" style="display:none;">
 
-    <div class="modulo-header">
+<div class="modulo-header">
 
-        <div>
-
-        </div>
+    <div>
 
         <h1>Gestión de Usuarios</h1>
 
         <p>Administra los usuarios registrados en TaskPro Manager.</p>
-    </div
+
+    </div>
+
     <div class="acciones-superior">
 
-        <button class="btn-principal">
-            
-            <i class="fa-solid fa-users-plus"></i>
+        <button id="btnNuevoUsuario" class="btn-principal">
+
+            <i class="fa-solid fa-user-plus"></i>
 
             Nuevo Usuario
 
         </button>
 
-    </div class="buscador">
+    </div>
+
+</div>
+
+<div class="buscador">
 
     <i class="fa-solid fa-magnifying-glass"></i>
-    
-    <input
-          type="text"
-          placeholder="Buscar por nombre o correo...">
-    
-       </div>
 
-    </div>
+    <input
+        id="buscarUsuario"
+        type="text"
+        placeholder="Buscar por nombre o correo...">
+
+</div>
 
     <table class="tabla">
 
@@ -240,6 +243,47 @@
     </table>
 
 </section>
+
+<div id="modalUsuario" class="modal" style="display:none;">
+
+    <div class="modal-contenido">
+
+        <h2>Nuevo Usuario</h2>
+
+        <input
+            id="nombreUsuario"
+            type="text"
+            placeholder="Nombre">
+
+        <input
+            id="correoUsuario"
+            type="email"
+            placeholder="Correo">
+
+        <input
+            id="rolUsuario"
+            type="text"
+            placeholder="Rol">
+
+        <div class="modal-botones">
+
+            <button id="guardarUsuario" class="btn-principal">
+
+                Guardar
+
+            </button>
+
+            <button id="cancelarModal" class="btn-eliminar">
+
+                Cancelar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
     <script src="js/api.js"></script>
     <script src="js/usuarios.js"></script>
