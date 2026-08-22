@@ -1,9 +1,9 @@
-const UsuarioModel = require("../models/usuarioModel");
+const UsuarioService = require("../services/UsuarioService");
 
 // Obtener todos los usuarios
 const obtenerUsuarios = (req, res) => {
 
-    UsuarioModel.obtenerUsuarios((err, usuarios) => {
+    UsuarioService.obtenerUsuarios((err, usuarios) => {
 
         if (err) {
             return res.status(500).json({
@@ -22,11 +22,18 @@ const obtenerUsuarioPorId = (req, res) => {
 
     const id = req.params.id;
 
-    UsuarioModel.obtenerUsuarioPorId(id, (err, usuario) => {
+    UsuarioService.obtenerUsuarioPorId(id, (err, usuario) => {
 
         if (err) {
+
+            if (err.tipo === "VALIDACION") {
+                return res.status(400).json({
+                    error: err.mensaje
+                });
+            }
+
             return res.status(500).json({
-                error: err.message
+                error: err.message || err.mensaje
             });
         }
 
@@ -45,11 +52,18 @@ const obtenerUsuarioPorId = (req, res) => {
 // Crear usuario
 const crearUsuario = (req, res) => {
 
-    UsuarioModel.crearUsuario(req.body, (err, id) => {
+    UsuarioService.crearUsuario(req.body, (err, id) => {
 
         if (err) {
+
+            if (err.tipo === "VALIDACION") {
+                return res.status(400).json({
+                    error: err.mensaje
+                });
+            }
+
             return res.status(500).json({
-                error: err.message
+                error: err.message || err.mensaje
             });
         }
 
@@ -67,11 +81,18 @@ const actualizarUsuario = (req, res) => {
 
     const id = req.params.id;
 
-    UsuarioModel.actualizarUsuario(id, req.body, (err, cambios) => {
+    UsuarioService.actualizarUsuario(id, req.body, (err, cambios) => {
 
         if (err) {
+
+            if (err.tipo === "VALIDACION") {
+                return res.status(400).json({
+                    error: err.mensaje
+                });
+            }
+
             return res.status(500).json({
-                error: err.message
+                error: err.message || err.mensaje
             });
         }
 
@@ -94,11 +115,18 @@ const eliminarUsuario = (req, res) => {
 
     const id = req.params.id;
 
-    UsuarioModel.eliminarUsuario(id, (err, cambios) => {
+    UsuarioService.eliminarUsuario(id, (err, cambios) => {
 
         if (err) {
+
+            if (err.tipo === "VALIDACION") {
+                return res.status(400).json({
+                    error: err.mensaje
+                });
+            }
+
             return res.status(500).json({
-                error: err.message
+                error: err.message || err.mensaje
             });
         }
 

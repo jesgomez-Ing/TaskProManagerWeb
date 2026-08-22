@@ -1,13 +1,13 @@
-const TareaModel = require("../models/tareaModel");
+const TareaService = require("../services/tareaService");
 
 // Obtener todas las tareas
 const obtenerTareas = (req, res) => {
 
-    TareaModel.obtenerTareas((err, tareas) => {
+    TareaService.obtenerTareas((err, tareas) => {
 
         if (err) {
             return res.status(500).json({
-                error: err.message
+                error: err.message || err.mensaje
             });
         }
 
@@ -17,16 +17,24 @@ const obtenerTareas = (req, res) => {
 
 };
 
+
 // Obtener tarea por ID
 const obtenerTareaPorId = (req, res) => {
 
     const id = req.params.id;
 
-    TareaModel.obtenerTareaPorId(id, (err, tarea) => {
+    TareaService.obtenerTareaPorId(id, (err, tarea) => {
 
         if (err) {
+
+            if (err.tipo === "VALIDACION") {
+                return res.status(400).json({
+                    error: err.mensaje
+                });
+            }
+
             return res.status(500).json({
-                error: err.message
+                error: err.message || err.mensaje
             });
         }
 
@@ -42,14 +50,22 @@ const obtenerTareaPorId = (req, res) => {
 
 };
 
+
 // Crear tarea
 const crearTarea = (req, res) => {
 
-    TareaModel.crearTarea(req.body, (err, id) => {
+    TareaService.crearTarea(req.body, (err, id) => {
 
         if (err) {
+
+            if (err.tipo === "VALIDACION") {
+                return res.status(400).json({
+                    error: err.mensaje
+                });
+            }
+
             return res.status(500).json({
-                error: err.message
+                error: err.message || err.mensaje
             });
         }
 
@@ -62,16 +78,24 @@ const crearTarea = (req, res) => {
 
 };
 
+
 // Actualizar tarea
 const actualizarTarea = (req, res) => {
 
     const id = req.params.id;
 
-    TareaModel.actualizarTarea(id, req.body, (err, cambios) => {
+    TareaService.actualizarTarea(id, req.body, (err, cambios) => {
 
         if (err) {
+
+            if (err.tipo === "VALIDACION") {
+                return res.status(400).json({
+                    error: err.mensaje
+                });
+            }
+
             return res.status(500).json({
-                error: err.message
+                error: err.message || err.mensaje
             });
         }
 
@@ -89,16 +113,24 @@ const actualizarTarea = (req, res) => {
 
 };
 
+
 // Eliminar tarea
 const eliminarTarea = (req, res) => {
 
     const id = req.params.id;
 
-    TareaModel.eliminarTarea(id, (err, cambios) => {
+    TareaService.eliminarTarea(id, (err, cambios) => {
 
         if (err) {
+
+            if (err.tipo === "VALIDACION") {
+                return res.status(400).json({
+                    error: err.mensaje
+                });
+            }
+
             return res.status(500).json({
-                error: err.message
+                error: err.message || err.mensaje
             });
         }
 
@@ -116,6 +148,8 @@ const eliminarTarea = (req, res) => {
 
 };
 
+
+// Exportar funciones
 module.exports = {
 
     obtenerTareas,
