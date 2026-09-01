@@ -1,76 +1,244 @@
+// ===============================
+// CARGAR DASHBOARD
+// ===============================
+
 async function cargarDashboard() {
 
     try {
 
-        // Usuarios
-        const respuestaUsuarios = await fetch(`${API_URL}/usuarios`);
-        const usuarios = await respuestaUsuarios.json();
+        // Obtener usuarios
+        const respuestaUsuarios =
+            await fetch(API_URL + "/usuarios");
 
-        document.getElementById("totalUsuarios").textContent = usuarios.length;
+        const usuarios =
+            await respuestaUsuarios.json();
 
-        // Tareas
-        const respuestaTareas = await fetch(`${API_URL}/tareas`);
-        const tareas = await respuestaTareas.json();
 
-        document.getElementById("totalTareas").textContent = tareas.length;
+        document.getElementById("totalUsuarios").textContent =
+            usuarios.length;
 
-        // Pendientes
-        const pendientes = tareas.filter(t => t.estado === "Pendiente");
 
-        document.getElementById("totalPendientes").textContent = pendientes.length;
+        // Obtener tareas
+        const respuestaTareas =
+            await fetch(API_URL + "/tareas");
 
-        // Finalizadas
-        const finalizadas = tareas.filter(t => t.estado === "Finalizada");
+        const tareas =
+            await respuestaTareas.json();
 
-        document.getElementById("totalFinalizadas").textContent = finalizadas.length;
+
+        document.getElementById("totalTareas").textContent =
+            tareas.length;
+
+
+        // Tareas pendientes
+        const pendientes =
+            tareas.filter(function(tarea) {
+
+                return tarea.estado === "Pendiente";
+
+            });
+
+
+        document.getElementById("totalPendientes").textContent =
+            pendientes.length;
+
+
+        // Tareas completadas
+        const completadas =
+            tareas.filter(function(tarea) {
+
+                return tarea.estado === "Completada";
+
+            });
+
+
+        document.getElementById("totalFinalizadas").textContent =
+            completadas.length;
+
 
     } catch (error) {
 
-        console.error("Error:", error);
+        console.error(
+            "Error al cargar el dashboard:",
+            error
+        );
 
     }
 
 }
 
-const menuDashboard = document.getElementById("menuDashboard");
-const menuUsuarios = document.getElementById("menuUsuarios");
 
-const dashboard = document.getElementById("dashboard");
-const moduloUsuarios = document.getElementById("moduloUsuarios");
 
-function activarMenu(menuActivo){
+// ===============================
+// ELEMENTOS DEL MENÚ
+// ===============================
 
-    document.querySelectorAll("nav a").forEach(opcion=>{
+const menuDashboard =
+    document.getElementById("menuDashboard");
 
-        opcion.classList.remove("active");
+const menuUsuarios =
+    document.getElementById("menuUsuarios");
 
-    });
+const menuTareas =
+    document.getElementById("menuTareas");
+
+
+// Secciones
+const dashboard =
+    document.getElementById("dashboard");
+
+const moduloUsuarios =
+    document.getElementById("moduloUsuarios");
+
+const moduloTareas =
+    document.getElementById("moduloTareas");
+
+
+
+// ===============================
+// ACTIVAR OPCIÓN DEL MENÚ
+// ===============================
+
+function activarMenu(menuActivo) {
+
+    document
+        .querySelectorAll("nav a")
+        .forEach(function(opcion) {
+
+            opcion.classList.remove("active");
+
+        });
+
 
     menuActivo.classList.add("active");
 
 }
 
-menuDashboard.addEventListener("click", function (e) {
 
-    e.preventDefault();
 
-    dashboard.style.display = "block";
-    moduloUsuarios.style.display = "none";
+// ===============================
+// MOSTRAR DASHBOARD
+// ===============================
 
-    activarMenu(menuDashboard);
+menuDashboard.addEventListener(
+    "click",
+    function(evento) {
 
-});
+        evento.preventDefault();
 
-menuUsuarios.addEventListener("click", function (e) {
 
-    e.preventDefault();
+        dashboard.style.display = "block";
 
-    dashboard.style.display = "none";
-    moduloUsuarios.style.display = "block";
+        moduloUsuarios.style.display = "none";
 
-    activarMenu(menuUsuarios);
+        moduloTareas.style.display = "none";
 
-    obtenerUsuarios();
 
-});
+        activarMenu(menuDashboard);
+
+
+        cargarDashboard();
+
+    }
+);
+
+
+
+// ===============================
+// MOSTRAR USUARIOS
+// ===============================
+
+menuUsuarios.addEventListener(
+    "click",
+    function(evento) {
+
+        evento.preventDefault();
+
+
+        dashboard.style.display = "none";
+
+        moduloUsuarios.style.display = "block";
+
+        moduloTareas.style.display = "none";
+
+
+        activarMenu(menuUsuarios);
+
+
+        obtenerUsuarios();
+
+    }
+);
+
+
+
+// ===============================
+// MOSTRAR TAREAS
+// ===============================
+
+menuTareas.addEventListener(
+    "click",
+    function(evento) {
+
+        evento.preventDefault();
+
+
+        dashboard.style.display = "none";
+
+        moduloUsuarios.style.display = "none";
+
+        moduloTareas.style.display = "block";
+
+
+        activarMenu(menuTareas);
+
+
+        obtenerTareas();
+
+    }
+);
+
+
+
+// ===============================
+// BOTÓN CREAR TAREA DEL DASHBOARD
+// ===============================
+
+const btnCrearTareaDashboard =
+    document.getElementById(
+        "btnCrearTareaDashboard"
+    );
+
+
+if (btnCrearTareaDashboard) {
+
+    btnCrearTareaDashboard.addEventListener(
+        "click",
+        function() {
+
+            dashboard.style.display = "none";
+
+            moduloUsuarios.style.display = "none";
+
+            moduloTareas.style.display = "block";
+
+
+            activarMenu(menuTareas);
+
+
+            document.getElementById(
+                "btnNuevaTarea"
+            ).click();
+
+        }
+    );
+
+}
+
+
+
+// ===============================
+// INICIAR DASHBOARD
+// ===============================
+
 cargarDashboard();
