@@ -11,6 +11,14 @@ const obtenerUsuarioPorId = (id, callback) => {
     const sql = "SELECT * FROM usuarios WHERE id = ?";
     db.get(sql, [id], callback);
 };
+// Obtener usuario por correo
+const obtenerUsuarioPorCorreo = (correo, callback) => {
+
+    const sql = "SELECT * FROM usuarios WHERE correo = ?";
+
+    db.get(sql, [correo], callback);
+
+};
 
 // Crear usuario
 const crearUsuario = (usuario, callback) => {
@@ -59,6 +67,7 @@ const eliminarUsuario = (id, callback) => {
 module.exports = {
     obtenerUsuarios,
     obtenerUsuarioPorId,
+    obtenerUsuarioPorCorreo,
     crearUsuario,
     actualizarUsuario,
     eliminarUsuario

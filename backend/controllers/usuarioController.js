@@ -143,13 +143,50 @@ const eliminarUsuario = (req, res) => {
     });
 
 };
+// Iniciar sesión
+const iniciarSesion = (req, res) => {
+
+    const { correo, password } = req.body;
+
+    UsuarioService.login(correo, password, (err, resultado) => {
+
+        if (err) {
+
+            if (err.tipo === "VALIDACION") {
+                return res.status(400).json({
+                    error: err.mensaje
+                });
+            }
+
+            if (err.tipo === "AUTENTICACION") {
+                return res.status(401).json({
+                    error: err.mensaje
+                });
+            }
+
+            return res.status(500).json({
+                error: err.message || err.mensaje
+            });
+        }
+
+        res.status(200).json(resultado);
+
+    });
+
+};
 
 module.exports = {
 
     obtenerUsuarios,
+
     obtenerUsuarioPorId,
+
     crearUsuario,
+
     actualizarUsuario,
-    eliminarUsuario
+
+    eliminarUsuario,
+
+    iniciarSesion
 
 };

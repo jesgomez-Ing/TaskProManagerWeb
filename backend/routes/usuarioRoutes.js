@@ -5,6 +5,8 @@ const UsuarioController = require("../controllers/usuarioController");
 
 // Consultar usuarios
 router.get("/", UsuarioController.obtenerUsuarios);
+// Iniciar sesión
+router.post("/login", UsuarioController.iniciarSesion);
 
 // Consultar usuario por ID
 router.get("/:id", UsuarioController.obtenerUsuarioPorId);
