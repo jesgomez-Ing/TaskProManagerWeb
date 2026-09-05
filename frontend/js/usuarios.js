@@ -1,178 +1,381 @@
-let listaUsuarios = [];
+let usuarios = [];
+let usuarioEditando = null;
+
+
 
 async function obtenerUsuarios() {
-
     try {
+        const respuesta = await fetch(API_URL + "/usuarios");
 
-        const respuesta = await fetch(`${API_URL}/usuarios`);
-        const usuarios = await respuesta.json();
-        listaUsuarios = usuarios;
+        if (!respuesta.ok) {
+            throw new Error("No se pudieron obtener los usuarios");
+        }
 
-        console.log("Usuarios:", usuarios);
+        usuarios = await respuesta.json();
 
-        mostrarUsuarios(listaUsuarios);
+        mostrarUsuarios(usuarios);
 
     } catch (error) {
-
-        console.error("Error al consultar usuarios:", error);
-
+        console.error(error);
+        alert("Error al cargar los usuarios");
     }
-
 }
 
-function mostrarUsuarios(listaUsuarios) {
+
+
+function mostrarUsuarios(lista) {
 
     const tabla = document.getElementById("tablaUsuarios");
 
-    if (!tabla) return;
-
     tabla.innerHTML = "";
 
-    listaUsuarios.forEach(usuario => {
+    lista.forEach(function(usuario) {
 
-    tabla.innerHTML += `
-        <tr>
+        const fila = document.createElement("tr");
 
-            <td>${usuario.id}</td>
+        fila.innerHTML =
+            "<td>" + usuario.id + "</td>" +
+            "<td>" + usuario.nombre + "</td>" +
+            "<td>" + usuario.correo + "</td>" +
+            "<td>" + usuario.rol + "</td>" +
+            "<td>" +
+                "<button class='btn-editar' data-id='" + usuario.id + "'>Editar</button>" +
+                "<button class='btn-eliminar' data-id='" + usuario.id + "'>Eliminar</button>" +
+            "</td>";
 
-            <td>
-                <strong>${usuario.nombre}</strong>
-            </td>
+        tabla.appendChild(fila);
+    });
 
-            <td>${usuario.correo}</td>
 
-            <td>
-                <span class="badge-rol">
-                    ${usuario.rol}
-                </span>
-            </td>
+    // Botones editar
+    const botonesEditar = document.querySelectorAll(".btn-editar");
 
-            <td>
+    botonesEditar.forEach(function(boton) {
 
-                <button class="btn-editar">
+        boton.addEventListener("click", function() {
 
-                    <i class="fa-solid fa-pen-to-square"></i>
+            const id = Number(this.getAttribute("data-id"));
 
-                    Editar
+            editarUsuario(id);
 
-                </button>
+        });
 
-                <button class="btn-eliminar">
+    });
 
-                    <i class="fa-solid fa-trash"></i>
 
-                    Eliminar
+    // Botones eliminar
+    const botonesEliminar = document.querySelectorAll(".btn-eliminar");
 
-                </button>
+    botonesEliminar.forEach(function(boton) {
 
-            </td>
+        boton.addEventListener("click", function() {
 
-        </tr>
-    `;
+            const id = Number(this.getAttribute("data-id"));
 
-});
+            eliminarUsuario(id);
+
+        });
+
+    });
 }
+
+
+
 async function guardarUsuario() {
 
     const nombre = document.getElementById("nombreUsuario").value.trim();
     const correo = document.getElementById("correoUsuario").value.trim();
-    const rol = document.getElementById("rolUsuario").value.trim();
+    const rol = document.getElementById("rolUsuario").value;
 
-    if (!nombre || !correo || !rol) {
 
-        alert("Todos los campos son obligatorios.");
+    if (nombre === "" || correo === "" || rol === "") {
+
+        alert("Todos los campos son obligatorios");
+
         return;
-
     }
 
-    const nuevoUsuario = {
 
-        nombre,
-        correo,
-        rol
-
+    const datos = {
+        nombre: nombre,
+        correo: correo,
+        rol: rol
     };
+
 
     try {
 
-        const respuesta = await fetch(`${API_URL}/usuarios`, {
+        let respuesta;
 
-            method: "POST",
 
-            headers: {
+        // ACTUALIZAR
+        if (usuarioEditando !== null) {
 
-                "Content-Type": "application/json"
-
-            },
-
-            body: JSON.stringify(nuevoUsuario)
-
-        });
-
-        if (!respuesta.ok) {
-
-            throw new Error("No fue posible guardar el usuario.");
+            respuesta = await fetch(
+                API_URL + "/usuarios/" + usuarioEditando,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(datos)
+                }
+            );
 
         }
 
-        obtenerUsuarios();
+        // CREAR
+        else {
 
-        document.getElementById("modalUsuario").style.display = "none";
+            respuesta = await fetch(
+                API_URL + "/usuarios",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(datos)
+                }
+            );
 
-        document.getElementById("nombreUsuario").value = "";
-        document.getElementById("correoUsuario").value = "";
-        document.getElementById("rolUsuario").value = "";
+        }
 
-        alert("Usuario creado correctamente.");
+
+        const resultado = await respuesta.json();
+
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                resultado.error ||
+                resultado.mensaje ||
+                "Error al guardar usuario"
+            );
+
+        }
+
+
+        if (usuarioEditando !== null) {
+
+            alert("Usuario actualizado correctamente");
+
+        } else {
+
+            alert("Usuario creado correctamente");
+
+        }
+
+
+        cerrarModal();
+
+        await obtenerUsuarios();
 
     } catch (error) {
 
         console.error(error);
-        alert("Ocurrió un error al crear el usuario.");
+
+        alert(error.message);
 
     }
-
 }
 
-obtenerUsuarios();
 
-const inputBuscar = document.getElementById("buscarUsuario");
 
-inputBuscar.addEventListener("input", function () {
+function editarUsuario(id) {
 
-    const texto = inputBuscar.value.toLowerCase();
+    const usuario = usuarios.find(function(usuario) {
 
-    const usuariosFiltrados = listaUsuarios.filter(usuario =>
+        return Number(usuario.id) === Number(id);
 
-        usuario.nombre.toLowerCase().includes(texto) ||
-        usuario.correo.toLowerCase().includes(texto)
+    });
 
+
+    if (!usuario) {
+
+        alert("Usuario no encontrado");
+
+        return;
+    }
+
+
+    usuarioEditando = id;
+
+
+    document.getElementById("nombreUsuario").value = usuario.nombre;
+
+    document.getElementById("correoUsuario").value = usuario.correo;
+
+    document.getElementById("rolUsuario").value = usuario.rol;
+
+
+    document.querySelector("#modalUsuario h2").textContent =
+        "Editar Usuario";
+
+
+    document.getElementById("modalUsuario").style.display = "flex";
+}
+
+
+
+async function eliminarUsuario(id) {
+
+    const usuario = usuarios.find(function(usuario) {
+
+        return Number(usuario.id) === Number(id);
+
+    });
+
+
+    if (!usuario) {
+
+        alert("Usuario no encontrado");
+
+        return;
+    }
+
+
+    const confirmar = confirm(
+        "¿Desea eliminar al usuario " + usuario.nombre + "?"
     );
 
-    mostrarUsuarios(usuariosFiltrados);
 
-});
-// ==========================================
-// MODAL USUARIO
-// ==========================================
+    if (!confirmar) {
 
-const btnNuevoUsuario = document.getElementById("btnNuevoUsuario");
+        return;
+    }
 
-const modalUsuario = document.getElementById("modalUsuario");
 
-const btnCancelarModal = document.getElementById("cancelarModal");
+    try {
 
-btnNuevoUsuario.addEventListener("click", () => {
+        const respuesta = await fetch(
+            API_URL + "/usuarios/" + id,
+            {
+                method: "DELETE"
+            }
+        );
 
-    modalUsuario.style.display = "flex";
 
-});
+        const resultado = await respuesta.json();
 
-btnCancelarModal.addEventListener("click", () => {
 
-    modalUsuario.style.display = "none";
+        if (!respuesta.ok) {
 
-});
-const btnGuardarUsuario = document.getElementById("guardarUsuario");
+            throw new Error(
+                resultado.error ||
+                resultado.mensaje ||
+                "No se pudo eliminar el usuario"
+            );
 
-btnGuardarUsuario.addEventListener("click", guardarUsuario);
+        }
+
+
+        alert("Usuario eliminado correctamente");
+
+
+        await obtenerUsuarios();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+}
+
+
+
+function cerrarModal() {
+
+    document.getElementById("modalUsuario").style.display = "none";
+
+
+    document.getElementById("nombreUsuario").value = "";
+
+    document.getElementById("correoUsuario").value = "";
+
+    document.getElementById("rolUsuario").value = "";
+
+
+    usuarioEditando = null;
+
+
+    document.querySelector("#modalUsuario h2").textContent =
+        "Nuevo Usuario";
+}
+
+
+
+document.getElementById("btnNuevoUsuario").addEventListener(
+    "click",
+    function() {
+
+        usuarioEditando = null;
+
+
+        document.getElementById("nombreUsuario").value = "";
+
+        document.getElementById("correoUsuario").value = "";
+
+        document.getElementById("rolUsuario").value = "";
+
+
+        document.querySelector("#modalUsuario h2").textContent =
+            "Nuevo Usuario";
+
+
+        document.getElementById("modalUsuario").style.display = "flex";
+
+    }
+);
+
+
+
+document.getElementById("cancelarModal").addEventListener(
+    "click",
+    function() {
+
+        cerrarModal();
+
+    }
+);
+
+
+
+document.getElementById("guardarUsuario").addEventListener(
+    "click",
+    function() {
+
+        guardarUsuario();
+
+    }
+);
+
+
+
+document.getElementById("buscarUsuario").addEventListener(
+    "input",
+    function() {
+
+        const texto = this.value.toLowerCase();
+
+
+        const resultados = usuarios.filter(function(usuario) {
+
+            return (
+                usuario.nombre.toLowerCase().includes(texto) ||
+                usuario.correo.toLowerCase().includes(texto) ||
+                usuario.rol.toLowerCase().includes(texto)
+            );
+
+        });
+
+
+        mostrarUsuarios(resultados);
+
+    }
+);
+
+
+
+obtenerUsuarios();

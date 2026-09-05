@@ -18,6 +18,10 @@
 <body class="dashboard-body">
 
 
+    <!-- ========================= -->
+    <!-- BARRA LATERAL -->
+    <!-- ========================= -->
+
     <aside class="sidebar">
 
         <div class="sidebar-top">
@@ -35,6 +39,7 @@
 
             </div>
 
+
             <nav>
 
                 <a href="#" id="menuDashboard" class="active">
@@ -42,15 +47,18 @@
                     Dashboard
                 </a>
 
+
                 <a href="#" id="menuUsuarios">
                     <i class="fa-solid fa-users"></i>
                     Usuarios
                 </a>
 
+
                 <a href="#" id="menuTareas">
                     <i class="fa-solid fa-list-check"></i>
                     Tareas
                 </a>
+
 
                 <a href="#" id="menuConfiguracion">
                     <i class="fa-solid fa-gear"></i>
@@ -60,6 +68,7 @@
             </nav>
 
         </div>
+
 
         <div class="sidebar-bottom">
 
@@ -77,6 +86,7 @@
 
             </div>
 
+
             <button class="btn-logout">
 
                 <i class="fa-solid fa-right-from-bracket"></i>
@@ -90,6 +100,11 @@
     </aside>
 
 
+
+    <!-- ========================= -->
+    <!-- DASHBOARD -->
+    <!-- ========================= -->
+
     <main id="dashboard" class="dashboard-main">
 
         <header class="dashboard-header">
@@ -102,7 +117,9 @@
 
         </header>
 
+
         <section class="cards-dashboard">
+
 
             <div class="card">
 
@@ -116,6 +133,8 @@
 
             </div>
 
+
+
             <div class="card">
 
                 <i class="fa-solid fa-list-check"></i>
@@ -127,6 +146,8 @@
                 <span>Activas</span>
 
             </div>
+
+
 
             <div class="card">
 
@@ -140,6 +161,8 @@
 
             </div>
 
+
+
             <div class="card">
 
                 <i class="fa-solid fa-circle-check"></i>
@@ -152,12 +175,14 @@
 
             </div>
 
+
         </section>
+
 
 
         <section class="acciones">
 
-            <button class="btn-principal">
+            <button class="btn-principal" id="btnCrearTareaDashboard">
 
                 <i class="fa-solid fa-plus"></i>
 
@@ -166,6 +191,8 @@
             </button>
 
         </section>
+
+
 
         <section class="actividad">
 
@@ -183,111 +210,358 @@
 
     </main>
 
-<section id="moduloUsuarios" class="modulo" style="display:none;">
 
-<div class="modulo-header">
 
-    <div>
+    <!-- ========================= -->
+    <!-- MODULO USUARIOS -->
+    <!-- ========================= -->
 
-        <h1>Gestión de Usuarios</h1>
+    <section id="moduloUsuarios" class="modulo" style="display:none;">
 
-        <p>Administra los usuarios registrados en TaskPro Manager.</p>
 
-    </div>
+        <div class="modulo-header">
 
-    <div class="acciones-superior">
+            <div>
 
-        <button id="btnNuevoUsuario" class="btn-principal">
+                <h1>Gestión de Usuarios</h1>
 
-            <i class="fa-solid fa-user-plus"></i>
+                <p>
+                    Administra los usuarios registrados en TaskPro Manager.
+                </p>
 
-            Nuevo Usuario
+            </div>
 
-        </button>
 
-    </div>
+            <div class="acciones-superior">
 
-</div>
+                <button id="btnNuevoUsuario" class="btn-principal">
 
-<div class="buscador">
+                    <i class="fa-solid fa-user-plus"></i>
 
-    <i class="fa-solid fa-magnifying-glass"></i>
+                    Nuevo Usuario
 
-    <input
-        id="buscarUsuario"
-        type="text"
-        placeholder="Buscar por nombre o correo...">
+                </button>
 
-</div>
+            </div>
 
-    <table class="tabla">
+        </div>
 
-        <thead>
 
-            <tr>
 
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Rol</th>
-                <th>Acciones</th>
+        <div class="buscador">
 
-            </tr>
+            <i class="fa-solid fa-magnifying-glass"></i>
 
-        </thead>
+            <input
+                id="buscarUsuario"
+                type="text"
+                placeholder="Buscar por nombre o correo...">
 
-        <tbody id="tablaUsuarios">
+        </div>
 
-        </tbody>
 
-    </table>
 
-</section>
+        <table class="tabla">
 
-<div id="modalUsuario" class="modal" style="display:none;">
+            <thead>
 
-    <div class="modal-contenido">
+                <tr>
 
-        <h2>Nuevo Usuario</h2>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
 
-        <input
-            id="nombreUsuario"
-            type="text"
-            placeholder="Nombre">
+                </tr>
 
-        <input
-            id="correoUsuario"
-            type="email"
-            placeholder="Correo">
+            </thead>
 
-        <input
-            id="rolUsuario"
-            type="text"
-            placeholder="Rol">
 
-        <div class="modal-botones">
+            <tbody id="tablaUsuarios">
 
-            <button id="guardarUsuario" class="btn-principal">
+            </tbody>
 
-                Guardar
+        </table>
 
-            </button>
+    </section>
 
-            <button id="cancelarModal" class="btn-eliminar">
 
-                Cancelar
 
-            </button>
+    <!-- ========================= -->
+    <!-- MODAL USUARIO -->
+    <!-- ========================= -->
+
+    <div id="modalUsuario" class="modal" style="display:none;">
+
+
+        <div class="modal-contenido">
+
+            <h2>Nuevo Usuario</h2>
+
+
+            <input
+                id="nombreUsuario"
+                type="text"
+                placeholder="Nombre">
+
+
+            <input
+                id="correoUsuario"
+                type="email"
+                placeholder="Correo">
+
+
+            <input
+                id="rolUsuario"
+                type="text"
+                placeholder="Rol">
+
+
+            <div class="modal-botones">
+
+                <button id="guardarUsuario" class="btn-principal">
+
+                    Guardar
+
+                </button>
+
+
+                <button id="cancelarModal" class="btn-eliminar">
+
+                    Cancelar
+
+                </button>
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
+
+
+    <!-- ========================= -->
+    <!-- MODULO TAREAS -->
+    <!-- ========================= -->
+
+    <section id="moduloTareas" class="modulo" style="display:none;">
+
+
+        <div class="modulo-header">
+
+            <div>
+
+                <h1>Gestión de Tareas</h1>
+
+                <p>
+                    Administra y realiza seguimiento de las tareas.
+                </p>
+
+            </div>
+
+
+            <div class="acciones-superior">
+
+                <button id="btnNuevaTarea" class="btn-principal">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Nueva Tarea
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- BUSCADOR -->
+
+        <div class="buscador">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                id="buscarTarea"
+                type="text"
+                placeholder="Buscar por título o descripción...">
+
+        </div>
+
+
+
+        <!-- TABLA DE TAREAS -->
+
+        <table class="tabla">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Prioridad</th>
+                    <th>Vencimiento</th>
+                    <th>Estado</th>
+                    <th>Responsable</th>
+                    <th>Acciones</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="tablaTareas">
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+
+
+    <!-- ========================= -->
+    <!-- MODAL TAREA -->
+    <!-- ========================= -->
+
+    <div id="modalTarea" class="modal" style="display:none;">
+
+
+        <div class="modal-contenido">
+
+            <h2>Nueva Tarea</h2>
+
+
+
+            <input
+                id="tituloTarea"
+                type="text"
+                placeholder="Título de la tarea">
+
+
+
+            <textarea
+                id="descripcionTarea"
+                placeholder="Descripción de la tarea"></textarea>
+
+
+
+            <select id="prioridadTarea">
+
+                <option value="">Seleccionar prioridad</option>
+
+                <option value="Alta">
+                    Alta
+                </option>
+
+                <option value="Media">
+                    Media
+                </option>
+
+                <option value="Baja">
+                    Baja
+                </option>
+
+            </select>
+
+
+
+            <label for="fechaInicioTarea">
+                Fecha de inicio
+            </label>
+
+
+            <input
+                id="fechaInicioTarea"
+                type="date">
+
+
+
+            <label for="fechaVencimientoTarea">
+                Fecha de vencimiento
+            </label>
+
+
+            <input
+                id="fechaVencimientoTarea"
+                type="date">
+
+
+
+            <select id="estadoTarea">
+
+                <option value="">
+                    Seleccionar estado
+                </option>
+
+                <option value="Pendiente">
+                    Pendiente
+                </option>
+
+                <option value="En Progreso">
+                    En Progreso
+                </option>
+
+                <option value="Completada">
+                    Completada
+                </option>
+
+            </select>
+
+
+
+            <select id="responsableTarea">
+
+                <option value="">
+                    Seleccionar responsable
+                </option>
+
+            </select>
+
+
+
+            <div class="modal-botones">
+
+
+                <button id="guardarTarea" class="btn-principal">
+
+                    Guardar
+
+                </button>
+
+
+
+                <button id="cancelarModalTarea" class="btn-eliminar">
+
+                    Cancelar
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ========================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ========================= -->
 
     <script src="js/api.js"></script>
+
     <script src="js/usuarios.js"></script>
-<script src="js/dashboard.js"></script>
+
+    <script src="js/tareas.js"></script>
+
+    <script src="js/dashboard.js"></script>
+
 
 </body>
+
 </html>
